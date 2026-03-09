@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="pagination">
+{% if jobs.has_previous %}
+    <a href="?page={{ jobs.previous_page_number }}">Previous</a>
+{% endif %}
+
+<span>Page {{ jobs.number }} of {{ jobs.paginator.num_pages }}</span>
+
+{% if jobs.has_next %}
+    <a href="?page={{ jobs.next_page_number }}">Next</a>
+{% endif %}
+</div>
+
+    <form method="get" id="filterForm">
+    {{ filter.form.as_p }}
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+<h1>Job Applications</h1>
+<div class="table-responsive rounded">
+<table class="table table-bordered">
+<tr>
+<th>Company</th>
+<th>Role</th>
+<th>Status</th>
+<th>Date</th>
+    <th>Actions</th>
+</tr>
+
+{% for job in jobs %}
+<tr>
+<td>{{ job.company }}</td>
+<td>{{ job.role }}</td>
+<td>{{ job.status }}</td>
+<td>{{ job.applied_date }}</td>
+ <td>
+            <a href="{% url 'edit_job' job.id %}" class="btn btn-sm btn-warning">Edit</a>
+            <a href="{% url 'delete_job' job.id %}"
+               class="btn btn-sm btn-danger"
+               onclick="return confirm('Are you sure?');">
+               Delete
+            </a>
+        </td>
+</tr>
+{% endfor %}
+
+</table>
+</div>
+{% endblock %}
