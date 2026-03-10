@@ -44,7 +44,7 @@ git clone https://github.com/lohith-2000/jobs_repo.git
 ### 2. Navigate to project directory
 
 ```
-cd job-application-tracker
+cd jobtracker
 ```
 
 ### 3. Create virtual environment (optional but recommended)
